@@ -39,6 +39,8 @@ void add_qtestcase(qtestcase_t * testcase, qunittest_t * unittest);
 
 void fprint_qunittest(FILE* stream, qunittest_t * unittest);
 
+int qunittest_failures(qunittest_t * unittest);
+
 /*
  *  A structure representing a collection of unit tests
  */

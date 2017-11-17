@@ -56,3 +56,16 @@ void fprint_qunittest(FILE* stream, qunittest_t * unittest) {
 
     fprintf(stream, "\n");
 }
+
+int qunittest_failures(qunittest_t * unittest) {
+    int count = 0;
+
+    qtestcase_t * testcase = unittest->first;
+
+    for (int i = 0; i < unittest->length; i++) {
+        count++;
+        testcase = testcase->next;
+    }
+
+    return count;
+}
