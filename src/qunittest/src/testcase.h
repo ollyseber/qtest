@@ -1,3 +1,6 @@
+#ifndef QUNITEST_TESTCASE_H
+#define QUNITEST_TESTCASE_H
+
 #include "qunittest/testsuite.h"
 
 struct qtestcase_s {
@@ -5,3 +8,5 @@ struct qtestcase_s {
     qtestresult_t result;
     qtestcase_t * next;
 };
+
+#endif
