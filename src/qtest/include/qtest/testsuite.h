@@ -50,4 +50,8 @@ qtestsuite_t * create_qtestsuite(char * label);
 
 char * qtestsuite_label(qtestsuite_t * testsuite);
 
+void add_qunittest(qunittest_t * unittest, qtestsuite_t * testsuite);
+
+void fprint_qtestsuite(FILE* stream, qtestsuite_t * testsuite);
+
 #endif

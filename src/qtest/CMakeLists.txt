@@ -1,10 +1,10 @@
-file(GLOB qunittest_SRC "src/*.h" "src/*.c")
+file(GLOB qtest_SRC "src/*.h" "src/*.c")
 
-add_library(qunittest ${qunittest_SRC})
+add_library(qtest ${qtest_SRC})
 
 # Define headers for the library
 target_include_directories(
-    qunittest PUBLIC
+    qtest PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
     PRIVATE src
@@ -12,7 +12,7 @@ target_include_directories(
 
 # set install locations
 install(
-    TARGETS qunittest 
+    TARGETS qtest 
     EXPORT MyLibraryConfig
     ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
     LIBRARY  DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -22,6 +22,6 @@ install(
 install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
 # Tests
-add_executable(testqunittest test/test.c)
-target_link_libraries(testqunittest qunittest)
-add_test(testqunittest testqunittest)
+add_executable(test_qtest test/test.c)
+target_link_libraries(test_qtest qtest)
+add_test(test_qtest test_qtest)

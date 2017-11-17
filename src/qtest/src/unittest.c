@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "qunittest/testsuite.h"
-#include "unittest.h"
-#include "testcase.h"
+#include "qtest/testsuite.h"
+#include "unittest_p.h"
+#include "testcase_p.h"
 
 qunittest_t * create_qunittest(char * label) {
     qunittest_t * unittest = malloc(sizeof(qunittest_t));
@@ -40,7 +40,7 @@ void add_qtestcase(qtestcase_t * testcase, qunittest_t * unittest) {
 }
 
 void fprint_qunittest(FILE* stream, qunittest_t * unittest) {
-    fprintf(stream, "UNIT: %s\n", qunittest_label(unittest));
+    fprintf(stream, "- %s\n", qunittest_label(unittest));
     
     if (unittest->length == 0) {
         fprintf(stream, "  [  SKIP  ]  No test cases in unit test!\n");
@@ -53,8 +53,6 @@ void fprint_qunittest(FILE* stream, qunittest_t * unittest) {
         fprint_qtestcase(stream, testcase);
         testcase = testcase->next;
     }
-
-    fprintf(stream, "\n");
 }
 
 int qunittest_failures(qunittest_t * unittest) {

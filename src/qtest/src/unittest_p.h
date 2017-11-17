@@ -1,7 +1,7 @@
 #ifndef QUNITTEST_UNITTEST_H
 #define QUNITTEST_UNITTEST_H
 
-#include "qunittest/testsuite.h"
+#include "qtest/testsuite.h"
 
 struct qunittest_s {
     char * label;

@@ -1,4 +1,4 @@
 cmake_minimum_required (VERSION 3.6)
-project (qunittest)
+project (qtest)
 
-add_subdirectory(qunittest)
+add_subdirectory(qtest)

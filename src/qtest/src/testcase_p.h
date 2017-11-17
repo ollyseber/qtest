@@ -1,7 +1,7 @@
 #ifndef QUNITEST_TESTCASE_H
 #define QUNITEST_TESTCASE_H
 
-#include "qunittest/testsuite.h"
+#include "qtest/testsuite.h"
 
 struct qtestcase_s {
     char * label;

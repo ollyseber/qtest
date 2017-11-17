@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "qunittest/testsuite.h"
-#include "testcase.h"
+#include "qtest/testsuite.h"
+#include "testcase_p.h"
 
 qtestcase_t * create_qtestcase(char * label) {
     qtestcase_t * testcase = malloc(sizeof(qtestcase_t));
