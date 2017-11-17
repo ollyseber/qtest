@@ -2,12 +2,8 @@
 #include <stdlib.h>
 
 #include "qunittest/testsuite.h"
-
-struct qunittest_s {
-    char * label;
-    qtestcase_t * first;
-    qunittest_t * next;
-};
+#include "unittest.h"
+#include "testcase.h"
 
 qunittest_t * create_qunittest(char * label) {
     qunittest_t * unittest = malloc(sizeof(qunittest_t));
@@ -18,10 +14,45 @@ qunittest_t * create_qunittest(char * label) {
     }
 
     unittest->label = label;
+    unittest->length = 0;
     unittest->first = NULL;
     return unittest;
 }
 
 char * qunittest_label(qunittest_t * unittest) {
     return unittest->label;
+}
+
+void add_qtestcase(qtestcase_t * testcase, qunittest_t * unittest) {
+    if (unittest->length == 0) {
+        unittest->first = testcase;
+        unittest->length = 1;
+        return;
+    }
+
+    qtestcase_t * last_testcase = unittest->first;
+
+    for (int i = 1; i < unittest->length; i++)
+        last_testcase = last_testcase->next;
+    
+    last_testcase->next = testcase;
+    unittest->length++;
+}
+
+void fprint_qunittest(FILE* stream, qunittest_t * unittest) {
+    fprintf(stream, "UNIT: %s\n", qunittest_label(unittest));
+    
+    if (unittest->length == 0) {
+        fprintf(stream, "  [  SKIP  ]  No test cases in unit test!\n");
+        return;
+    }
+
+    qtestcase_t * testcase = unittest->first;
+
+    for (int i = 0; i < unittest->length; i++) {
+        fprint_qtestcase(stream, testcase);
+        testcase = testcase->next;
+    }
+
+    fprintf(stream, "\n");
 }

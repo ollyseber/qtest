@@ -2,12 +2,7 @@
 #include <stdlib.h>
 
 #include "qunittest/testsuite.h"
-
-struct qtestcase_s {
-    char * label;
-    qtestresult_t result;
-    qtestcase_t * next;
-};
+#include "testcase.h"
 
 qtestcase_t * create_qtestcase(char * label) {
     qtestcase_t * testcase = malloc(sizeof(qtestcase_t));
@@ -27,3 +22,20 @@ char * qtestcase_label(qtestcase_t * testcase) {
     return testcase->label;
 }
 
+qtestresult_t qtestcase_result(qtestcase_t * testcase) {
+    return testcase->result;
+}
+
+qtestcase_t * q_assert_true(bool condition, char * label) {
+    qtestcase_t * testcase = create_qtestcase(label);
+    if (condition)
+        testcase->result = PASSED;
+    return testcase;
+}
+
+void fprint_qtestcase(FILE* stream, qtestcase_t * testcase) {
+    if (qtestcase_result(testcase) == PASSED)
+        fprintf(stream, "  [ PASSED ]  %s\n", qtestcase_label(testcase));
+    else
+        fprintf(stream, "  [ FAILED ]  %s\n", qtestcase_label(testcase));
+}
