@@ -3,9 +3,9 @@
 #include "qunittest/testsuite.h"
 
 int main() {
-    qtestsuite_t * suite = create_qtestsuite("Example Testsuite");
+    qtestcase_t * testcase = create_qtestcase("Example test case");
 
-    fprintf(stdout, "Testsuite: %s\n", qtestsuite_label(suite));
+    fprintf(stdout, "Testsuite: %s\n", qtestcase_label(testcase));
 
     return 0;
 }
