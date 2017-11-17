@@ -9,4 +9,6 @@ struct qtestsuite_s {
     qunittest_t * first;
 };
 
+char * qtestsuite_label(qtestsuite_t * testsuite);
+
 #endif

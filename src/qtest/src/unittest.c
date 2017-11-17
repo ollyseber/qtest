@@ -15,6 +15,7 @@ qunittest_t * create_qunittest(char * label) {
 
     unittest->label = label;
     unittest->length = 0;
+    unittest->result = PASSED;
     unittest->first = NULL;
     return unittest;
 }
@@ -37,6 +38,9 @@ void add_qtestcase(qtestcase_t * testcase, qunittest_t * unittest) {
     
     last_testcase->next = testcase;
     unittest->length++;
+
+    if (testcase->result == FAILED)
+        unittest->result = FAILED;
 }
 
 void fprint_qunittest(FILE* stream, qunittest_t * unittest) {
@@ -53,6 +57,16 @@ void fprint_qunittest(FILE* stream, qunittest_t * unittest) {
         fprint_qtestcase(stream, testcase);
         testcase = testcase->next;
     }
+
+    fprintf(stream, "    ------\n    Result :  ");
+
+    int failures = qunittest_failures(unittest);
+
+    if (failures == 0)
+        fprintf(stream, "All testcases passed\n");
+    else
+        fprintf(stream, "%d of %d testcases failed\n",
+            failures, unittest->length);
 }
 
 int qunittest_failures(qunittest_t * unittest) {
@@ -61,9 +75,16 @@ int qunittest_failures(qunittest_t * unittest) {
     qtestcase_t * testcase = unittest->first;
 
     for (int i = 0; i < unittest->length; i++) {
-        count++;
+        if (testcase->result == FAILED)
+            count++;
         testcase = testcase->next;
     }
 
     return count;
+}
+
+qtestresult_t qtest_assert_true(bool condition, char * label, qunittest_t * unittest) {
+    qtestcase_t * testcase = qtestcase_assert_true(condition, label);
+    add_qtestcase(testcase, unittest);
+    return testcase->result;
 }

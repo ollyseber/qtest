@@ -26,7 +26,7 @@ qtestresult_t qtestcase_result(qtestcase_t * testcase) {
     return testcase->result;
 }
 
-qtestcase_t * q_assert_true(bool condition, char * label) {
+qtestcase_t * qtestcase_assert_true(bool condition, char * label) {
     qtestcase_t * testcase = create_qtestcase(label);
     if (condition)
         testcase->result = PASSED;

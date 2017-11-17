@@ -14,6 +14,7 @@ qtestsuite_t * create_qtestsuite(char * label) {
     }
 
     testsuite->label = label;
+    testsuite->length = 0;
     testsuite->first = NULL;
     return testsuite;
 }
@@ -22,7 +23,9 @@ char * qtestsuite_label(qtestsuite_t * testsuite) {
     return testsuite->label;
 }
 
-void add_qunittest(qunittest_t * unittest, qtestsuite_t * testsuite) {
+qunittest_t * add_qunittest(char * label, qtestsuite_t * testsuite) {
+    qunittest_t * unittest = create_qunittest(label);
+
     if (testsuite->length == 0) {
         testsuite->first = unittest;
         testsuite->length = 1;
@@ -39,7 +42,7 @@ void add_qunittest(qunittest_t * unittest, qtestsuite_t * testsuite) {
 }
 
 void fprint_qtestsuite(FILE* stream, qtestsuite_t * testsuite) {
-    fprintf(stream, "Test Suite: %s\n\n", qtestsuite_label(testsuite));
+    fprintf(stream, "- %s\n    ------\n", qtestsuite_label(testsuite));
 
     if (testsuite->length == 0) {
         fprintf(stream, "Error: No unit tests in test suite!\n");
@@ -53,4 +56,26 @@ void fprint_qtestsuite(FILE* stream, qtestsuite_t * testsuite) {
         fprintf(stream, "\n");
         unittest = unittest->next;
     }
+
+    int failures = qtestsuite_failures(testsuite);
+
+    if (failures == 0)
+        fprintf(stream, "All unit tests passed!\n");
+    else
+        fprintf(stream, "%d of %d unit tests failed\n",
+            failures, testsuite->length);
+}
+
+int qtestsuite_failures(qtestsuite_t * testsuite) {
+    int count = 0;
+
+    qunittest_t * unittest = testsuite->first;
+
+    for (int i = 0; i < testsuite->length; i++) {
+        if (unittest->result == FAILED)
+            count++;
+        unittest = unittest->next;
+    }
+
+    return count;
 }
