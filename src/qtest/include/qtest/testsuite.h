@@ -42,18 +42,26 @@ qtestresult_t qtest_assert_true(bool condition, char * label, qunittest_t * unit
 void fprint_qtestsuite(FILE* stream, qtestsuite_t * testsuite);
 
 /*
+*  Get the number of test cases in a test suite
+*/
+int qtestsuite_unittest_count(qtestsuite_t * testsuite);
+
+/*
  *  Get the number of failed unit tests in a test suite
  */
 int qtestsuite_unittest_failures(qtestsuite_t * testsuite);
+
+/*
+ *  Get the number of test cases in a test suite
+ */
+int qtestsuite_testcase_count(qtestsuite_t * testsuite);
 
 /*
 *  Get the number of failed test cases in a test suite
 */
 int qtestsuite_testcase_failures(qtestsuite_t * testsuite);
 
-/*
-*  Get the number of failed test cases in a unit test
-*/
-int qunittest_testcase_failures(qunittest_t * unittest);
+
+
 
 #endif

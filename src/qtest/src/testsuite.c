@@ -52,18 +52,17 @@ void fprint_qtestsuite(FILE* stream, qtestsuite_t * testsuite) {
     }
 
     qunittest_t * unittest = testsuite->first;
-    int testcase_failures = 0;
-    int total_testcases = 0;
 
     for (int i = 0; i < testsuite->length; i++) {
-        testcase_failures += qunittest_testcase_failures(unittest);
-        total_testcases += unittest->length;
         fprint_qunittest(stream, unittest);
         fprintf(stream, "\n");
         unittest = unittest->next;
     }
 
+    int unittests = qtestsuite_unittest_count(testsuite);
     int unittest_failures = qtestsuite_unittest_failures(testsuite);
+    int testcases = qtestsuite_testcase_count(testsuite);
+    int testcase_failures = qtestsuite_testcase_failures(testsuite);
 
     fprintf(stream, "- Results: %s\n", testsuite->label);
 
@@ -72,13 +71,30 @@ void fprint_qtestsuite(FILE* stream, qtestsuite_t * testsuite) {
             "  All unit tests passed!\n"
             "  Test cases: %d\n"
             "  Unit tests: %d\n",
-            total_testcases, testsuite->length);
+            testcases, unittests);
     else
         fprintf(stream, 
             "  Test cases failed: %d of %d\n"
             "  Unit tests failed: %d of %d\n",
-            testcase_failures, total_testcases,
-            unittest_failures, testsuite->length);
+            testcase_failures, testcases,
+            unittest_failures, unittests);
+}
+
+int qtestsuite_unittest_count(qtestsuite_t * testsuite) {
+    return testsuite->length;
+}
+
+int qtestsuite_testcase_count(qtestsuite_t * testsuite) {
+    int count = 0;
+
+    qunittest_t * unittest = testsuite->first;
+
+    for (int i = 0; i < testsuite->length; i++) {
+        count += unittest->length;
+        unittest = unittest->next;
+    }
+
+    return count;
 }
 
 int qtestsuite_unittest_failures(qtestsuite_t * testsuite) {
@@ -101,7 +117,7 @@ int qtestsuite_testcase_failures(qtestsuite_t * testsuite) {
     qunittest_t * unittest = testsuite->first;
 
     for (int i = 0; i < testsuite->length; i++) {
-        count += unittest->length;
+        count += qunittest_testcase_failures(unittest);
         unittest = unittest->next;
     }
 
