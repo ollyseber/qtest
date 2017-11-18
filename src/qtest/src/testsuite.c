@@ -29,7 +29,7 @@ qunittest_t * add_qunittest(char * label, qtestsuite_t * testsuite) {
     if (testsuite->length == 0) {
         testsuite->first = unittest;
         testsuite->length = 1;
-        return;
+        return unittest;
     }
 
     qunittest_t * last_unittest = testsuite->first;
@@ -39,6 +39,8 @@ qunittest_t * add_qunittest(char * label, qtestsuite_t * testsuite) {
 
     last_unittest->next = unittest;
     testsuite->length++;
+
+    return unittest;
 }
 
 void fprint_qtestsuite(FILE* stream, qtestsuite_t * testsuite) {
@@ -50,30 +52,56 @@ void fprint_qtestsuite(FILE* stream, qtestsuite_t * testsuite) {
     }
 
     qunittest_t * unittest = testsuite->first;
+    int testcase_failures = 0;
+    int total_testcases = 0;
 
     for (int i = 0; i < testsuite->length; i++) {
+        testcase_failures += qunittest_testcase_failures(unittest);
+        total_testcases += unittest->length;
         fprint_qunittest(stream, unittest);
         fprintf(stream, "\n");
         unittest = unittest->next;
     }
 
-    int failures = qtestsuite_failures(testsuite);
+    int unittest_failures = qtestsuite_unittest_failures(testsuite);
 
-    if (failures == 0)
-        fprintf(stream, "All unit tests passed!\n");
+    fprintf(stream, "- Results: %s\n", testsuite->label);
+
+    if (unittest_failures == 0)
+        fprintf(stream, 
+            "  All unit tests passed!\n"
+            "  Test cases: %d\n"
+            "  Unit tests: %d\n",
+            total_testcases, testsuite->length);
     else
-        fprintf(stream, "%d of %d unit tests failed\n",
-            failures, testsuite->length);
+        fprintf(stream, 
+            "  Test cases failed: %d of %d\n"
+            "  Unit tests failed: %d of %d\n",
+            testcase_failures, total_testcases,
+            unittest_failures, testsuite->length);
 }
 
-int qtestsuite_failures(qtestsuite_t * testsuite) {
+int qtestsuite_unittest_failures(qtestsuite_t * testsuite) {
     int count = 0;
 
     qunittest_t * unittest = testsuite->first;
 
     for (int i = 0; i < testsuite->length; i++) {
-        if (unittest->result == FAILED)
+        if (qunittest_testcase_failures(unittest) > 0)
             count++;
+        unittest = unittest->next;
+    }
+
+    return count;
+}
+
+int qtestsuite_testcase_failures(qtestsuite_t * testsuite) {
+    int count = 0;
+
+    qunittest_t * unittest = testsuite->first;
+
+    for (int i = 0; i < testsuite->length; i++) {
+        count += unittest->length;
         unittest = unittest->next;
     }
 
