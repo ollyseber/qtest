@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - New `create_qunittest` and `add_existing_qunittest` function to public API to allow unit test
   objects to be created separately from the test suite environment, allowing for more effective
   refactoring of test code in projects.
+- Added function to create test case checking if double values are approximately equal, for a 
+  given tolerance.
 
 ## [1.1.0]
 ### Added
