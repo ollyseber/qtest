@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 #include "qtest/testsuite.h"
 
 int main() {
@@ -13,9 +11,9 @@ int main() {
     qtest_assert_true(false, "Case 1", unittest_2);
     qtest_assert_true(false, "Case 2", unittest_2);
 
-    qunittest_t * unittest_3 = add_qunittest("Unit 3", testsuite);
+    qunittest_t * unittest_3 = create_qunittest("Unit 3");
+    add_existing_qunittest(unittest_3, testsuite);
 
-    fprint_qtestsuite(stdout, testsuite);
-    getc(stdin);
+    print_qtestsuite(testsuite);
     return 0;
 }

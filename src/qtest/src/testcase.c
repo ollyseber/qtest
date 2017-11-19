@@ -3,6 +3,10 @@
 #include <string.h> // For strdup()
 #include <math.h> // For fabs()
 
+#ifdef _MSC_VER
+#define strdup _strdup
+#endif
+
 #include "qtest/testsuite.h"
 #include "testcase_p.h"
 

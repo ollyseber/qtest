@@ -23,9 +23,7 @@ char * qtestsuite_label(qtestsuite_t * testsuite) {
     return testsuite->label;
 }
 
-qunittest_t * add_qunittest(char * label, qtestsuite_t * testsuite) {
-    qunittest_t * unittest = create_qunittest(label);
-
+qunittest_t * add_existing_qunittest(qunittest_t * unittest, qtestsuite_t * testsuite) {
     if (testsuite->length == 0) {
         testsuite->first = unittest;
         testsuite->length = 1;
@@ -41,6 +39,11 @@ qunittest_t * add_qunittest(char * label, qtestsuite_t * testsuite) {
     testsuite->length++;
 
     return unittest;
+}
+
+qunittest_t * add_qunittest(char * label, qtestsuite_t * testsuite) {
+    qunittest_t * unittest = create_qunittest(label);
+    return add_existing_qunittest(unittest, testsuite);
 }
 
 void fprint_qtestsuite(FILE* stream, qtestsuite_t * testsuite) {
@@ -78,6 +81,10 @@ void fprint_qtestsuite(FILE* stream, qtestsuite_t * testsuite) {
             "  Unit tests failed: %d of %d\n",
             testcase_failures, testcases,
             unittest_failures, unittests);
+}
+
+void print_qtestsuite(qtestsuite_t * testsuite) {
+    fprint_qtestsuite(stdout, testsuite);
 }
 
 int qtestsuite_unittest_count(qtestsuite_t * testsuite) {

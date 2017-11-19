@@ -1,6 +1,8 @@
 #ifndef QTEST_UNITTEST_H
 #define QTEST_UNITTEST_H
 
+#include <stdio.h>
+
 #include "qtest/testsuite.h"
 #include "testcase_p.h"
 
@@ -10,8 +12,6 @@ struct qunittest_s {
     qtestcase_t * first;
     qunittest_t * next;
 };
-
-qunittest_t * create_qunittest(char * label);
 
 char * qunittest_label(qunittest_t * unittest);
 
