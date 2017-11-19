@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [1.0.2-snapshot]
+### Fixed
+- Redefined use of `strdup` command to `_strdup` when macro `_MSC_VER` is defined (ie. when
+  build on Windows).
 
 ## [1.0.1] - 2017-11-19
 ### Added
