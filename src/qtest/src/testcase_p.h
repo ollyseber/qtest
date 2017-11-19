@@ -1,5 +1,5 @@
-#ifndef QUNITEST_TESTCASE_H
-#define QUNITEST_TESTCASE_H
+#ifndef QTEST_TESTCASE_H
+#define QTEST_TESTCASE_H
 
 #include "qtest/testsuite.h"
 
