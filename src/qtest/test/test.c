@@ -13,7 +13,7 @@ int main() {
     qtest_assert_true(false, "Case 1", unittest_2);
     qtest_assert_true(false, "Case 2", unittest_2);
 
-    qunittest_t * unittest_3 = add_qunittest("Unit 3", testsuite);
+    add_qunittest("Unit 3", testsuite);
 
     fprint_qtestsuite(stdout, testsuite);
     getc(stdin);
