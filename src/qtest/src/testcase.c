@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <string.h> // For strdup()
 
+#ifdef _MSC_VER
+#define strdup _strdup
+#endif
+
 #include "qtest/testsuite.h"
 #include "testcase_p.h"
 
