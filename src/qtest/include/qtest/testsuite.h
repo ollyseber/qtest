@@ -36,6 +36,11 @@ typedef struct qtestsuite_s qtestsuite_t;
 qtestsuite_t * create_qtestsuite(char * label);
 
 /*
+    Create a unit test with a description/label
+*/
+qunittest_t * create_qunittest(char * label);
+
+/*
     Create a unit test and add it to a test suite
 */
 qunittest_t * add_qunittest(char * label, qtestsuite_t * testsuite);
