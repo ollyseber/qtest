@@ -2,6 +2,7 @@
 #define QTEST_TESTSUITE_H
 
 #include <stdbool.h>
+#include <stdio.h>
 
 /*
     semantic version (semver.org): 1.0.3-snapshot
@@ -45,7 +46,12 @@ qunittest_t * add_qunittest(char * label, qtestsuite_t * testsuite);
 qtestresult_t qtest_assert_true(bool condition, char * label, qunittest_t * unittest);
 
 /*
-    Print test suite results
+Print test suite results to stdout
+*/
+void print_qtestsuite(qtestsuite_t * testsuite);
+
+/*
+    Print test suite results to file 
 */
 void fprint_qtestsuite(FILE* stream, qtestsuite_t * testsuite);
 

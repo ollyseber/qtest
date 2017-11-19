@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 #include "qtest/testsuite.h"
 
 int main() {
@@ -15,7 +13,6 @@ int main() {
 
     add_qunittest("Unit 3", testsuite);
 
-    fprint_qtestsuite(stdout, testsuite);
-    getc(stdin);
+    print_qtestsuite(testsuite);
     return 0;
 }

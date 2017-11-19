@@ -80,6 +80,10 @@ void fprint_qtestsuite(FILE* stream, qtestsuite_t * testsuite) {
             unittest_failures, unittests);
 }
 
+void print_qtestsuite(qtestsuite_t * testsuite) {
+    fprint_qtestsuite(stdout, testsuite);
+}
+
 int qtestsuite_unittest_count(qtestsuite_t * testsuite) {
     return testsuite->length;
 }
