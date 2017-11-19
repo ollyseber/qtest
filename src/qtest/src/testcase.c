@@ -7,8 +7,8 @@
 #include "testcase_p.h"
 
 /* Checks whether doubles <a> and <b> are within <epsilon> percent of each other */
-bool approximately_equal(double a, double b, double epsilon) {
-    return fabs(a - b) <= ( (fabs(a) < fabs(b) ? fabs(b) : fabs(a)) * epsilon);
+bool approximately_equal(double a, double b, double tolerance) {
+    return fabs(a - b) <= ( (fabs(a) < fabs(b) ? fabs(b) : fabs(a)) * tolerance);
 }
 
 qtestcase_t * create_qtestcase(char * label) {
@@ -42,7 +42,7 @@ qtestcase_t * qtestcase_assert_true(bool condition, char * label) {
 
 qtestcase_t * qtestcase_doubles_equal(double expected, double actual, double tolerance, char * label) {
     qtestcase_t * testcase = create_qtestcase(label);
-    if (approximatelyEqual(expected, actual, tolerance))
+    if (approximately_equal(expected, actual, tolerance))
         testcase->result = PASSED;
     return testcase;
 }
