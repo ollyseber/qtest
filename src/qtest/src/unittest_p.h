@@ -13,8 +13,6 @@ struct qunittest_s {
     qunittest_t * next;
 };
 
-qunittest_t * create_qunittest(char * label);
-
 char * qunittest_label(qunittest_t * unittest);
 
 void add_qtestcase(qtestcase_t * testcase, qunittest_t * unittest);

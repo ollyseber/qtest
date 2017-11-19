@@ -36,9 +36,19 @@ typedef struct qtestsuite_s qtestsuite_t;
 qtestsuite_t * create_qtestsuite(char * label);
 
 /*
+    Create a unit test with a description/label
+*/
+qunittest_t * create_qunittest(char * label);
+
+/*
     Create a unit test and add it to a test suite
 */
 qunittest_t * add_qunittest(char * label, qtestsuite_t * testsuite);
+
+/*
+    Add a unit test to a test suite
+*/
+qunittest_t * add_existing_qunittest(qunittest_t * unittest, qtestsuite_t * testsuite);
 
 /*
     Add a test case to a unit test and set its result based on a boolean condition

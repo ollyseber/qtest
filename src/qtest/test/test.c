@@ -11,7 +11,8 @@ int main() {
     qtest_assert_true(false, "Case 1", unittest_2);
     qtest_assert_true(false, "Case 2", unittest_2);
 
-    add_qunittest("Unit 3", testsuite);
+    qunittest_t * unittest_3 = create_qunittest("Unit 3");
+    add_existing_qunittest(unittest_3, testsuite);
 
     print_qtestsuite(testsuite);
     return 0;
