@@ -46,6 +46,11 @@ qunittest_t * create_qunittest(char * label);
 qunittest_t * add_qunittest(char * label, qtestsuite_t * testsuite);
 
 /*
+    Add a unit test to a test suite
+*/
+qunittest_t * add_existing_qunittest(qunittest_t * unittest, qtestsuite_t * testsuite);
+
+/*
     Add a test case to a unit test and set its result based on a boolean condition
 */
 qtestresult_t qtest_assert_true(bool condition, char * label, qunittest_t * unittest);
