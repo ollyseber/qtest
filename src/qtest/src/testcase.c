@@ -7,7 +7,7 @@
 #include "testcase_p.h"
 
 /* Checks whether doubles <a> and <b> are within <epsilon> percent of each other */
-bool approximatelyEqual(double a, double b, double epsilon) {
+bool approximately_equal(double a, double b, double epsilon) {
     return fabs(a - b) <= ( (fabs(a) < fabs(b) ? fabs(b) : fabs(a)) * epsilon);
 }
 
