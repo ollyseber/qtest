@@ -45,6 +45,11 @@ qunittest_t * add_qunittest(char * label, qtestsuite_t * testsuite);
 qtestresult_t qtest_assert_true(bool condition, char * label, qunittest_t * unittest);
 
 /*
+    Add a test case to a unit test and set its result based on whether two doubles are within <tolerance> percentage of each other.
+*/
+qtestresult_t qtest_doubles_equal(double expected, double actual, double tolerance, char * label, qunittest_t * unittest);
+
+/*
     Print test suite results
 */
 void fprint_qtestsuite(FILE* stream, qtestsuite_t * testsuite);

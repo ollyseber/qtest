@@ -85,3 +85,9 @@ qtestresult_t qtest_assert_true(bool condition, char * label, qunittest_t * unit
     add_qtestcase(testcase, unittest);
     return testcase->result;
 }
+
+qtestresult_t qtest_doubles_equal(double expected, double actual, double tolerance, char * label, qunittest_t * unittest) {
+    qtestcase_t * testcase = qtestcase_doubles_equal(expected, actual, tolerance, label);
+    add_qtestcase(testcase, unittest);
+    return testcase->result;
+}

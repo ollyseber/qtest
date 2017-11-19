@@ -22,6 +22,8 @@ qtestresult_t qtestcase_result(qtestcase_t * testcase);
 
 qtestcase_t * qtestcase_assert_true(bool condition, char * label);
 
+qtestcase_t * qtestcase_doubles_equal(double expected, double actual, double tolerance, char * label);
+
 void fprint_qtestcase(FILE* stream, qtestcase_t * testcase);
 
 #endif
