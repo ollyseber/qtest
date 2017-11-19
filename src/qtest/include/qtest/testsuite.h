@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 /*
-    semantic version (semver.org): 1.2.0-snapshot
+    semantic version (semver.org): 1.2.0
 
     qtest is a small test framework library for C. It provides a test suite
     for holding a collection of unit tests that in turn hold a collection 

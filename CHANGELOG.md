@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [1.2.0-snapshot]
+## [1.2.0]
 ### Added
 - New `create_qunittest` and `add_existing_qunittest` function to public API to allow unit test
   objects to be created separately from the test suite environment, allowing for more effective
