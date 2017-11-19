@@ -1,6 +1,8 @@
 #ifndef QTEST_UNITTEST_H
 #define QTEST_UNITTEST_H
 
+#include <stdio.h>
+
 #include "qtest/testsuite.h"
 #include "testcase_p.h"
 
