@@ -61,6 +61,12 @@ qtestresult_t qtest_assert_true(bool condition, char * label, qunittest_t * unit
 qtestresult_t qtest_doubles_equal(double expected, double actual, double tolerance, char * label, qunittest_t * unittest);
 
 /*
+    Add a test case to a unit test and set its result based on whether two doubles
+    are within a specified range of each other.
+*/
+qtestresult_t qtest_doubles_within_range(double actual, double expected, double range, char * label, qunittest_t * unittest);
+
+/*
     Print test suite results to stdout
 */
 void print_qtestsuite(qtestsuite_t * testsuite);

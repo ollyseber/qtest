@@ -51,6 +51,10 @@ qtestcase_t * qtestcase_doubles_equal(double expected, double actual, double tol
     return testcase;
 }
 
+qtestcase_t * qtestcase_doubles_within_range(double actual, double expected, double range, char * label) {
+    return qtestcase_assert_true(fabs(actual - expected) <= range, label);
+}
+
 void fprint_qtestcase(FILE* stream, qtestcase_t * testcase) {
     if (qtestcase_result(testcase) == PASSED)
         fprintf(stream, "  [ PASSED ]  %s\n", qtestcase_label(testcase));
