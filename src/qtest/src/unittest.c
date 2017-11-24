@@ -95,3 +95,9 @@ qtestresult_t qtest_doubles_equal(double expected, double actual, double toleran
     add_qtestcase(testcase, unittest);
     return testcase->result;
 }
+
+qtestresult_t qtest_doubles_within_range(double actual, double expected, double range, char * label, qunittest_t * unittest) {
+    qtestcase_t * testcase = qtestcase_doubles_within_range(actual, expected, range, label);
+    add_qtestcase(testcase, unittest);
+    return testcase->result;
+}
