@@ -10,7 +10,7 @@
 #include "qtest/testsuite.h"
 #include "testcase_p.h"
 
-/* Checks whether doubles <a> and <b> are within <epsilon> percent of each other */
+/* Checks whether doubles <a> and <b> are within <tolerance> percent of each other */
 bool approximately_equal(double a, double b, double tolerance) {
     return fabs(a - b) <= ( (fabs(a) < fabs(b) ? fabs(b) : fabs(a)) * tolerance);
 }
